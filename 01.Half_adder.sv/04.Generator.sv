@@ -1,3 +1,4 @@
+//generator
 class generator;
   transaction tr;
   mailbox gen_to_driv;
