@@ -1,3 +1,4 @@
+//driver
 class driver;
   transaction tr;
   mailbox gen_to_driv;
