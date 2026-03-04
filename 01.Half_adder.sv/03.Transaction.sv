@@ -1,3 +1,4 @@
+//transaction
 class transaction;
   
   randc bit a;
