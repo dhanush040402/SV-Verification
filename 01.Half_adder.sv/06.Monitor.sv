@@ -1,3 +1,4 @@
+//monitor
 class monitor;
   transaction tr;
   mailbox moni_to_sco;
