@@ -1,3 +1,4 @@
+//scoreboard
 class scoreboard;
   transaction tr;
   mailbox moni_to_sco;
