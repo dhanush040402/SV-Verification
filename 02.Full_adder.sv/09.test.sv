@@ -1,3 +1,4 @@
+//test
 `include "environment.sv"
 
 program test(intr inf);
