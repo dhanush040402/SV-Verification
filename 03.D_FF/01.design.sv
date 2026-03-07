@@ -1,3 +1,4 @@
+//design
 `include "interface.sv"
 module d_ff(intr inf);
   always_ff @(posedge inf.clk or negedge inf.rst)begin
