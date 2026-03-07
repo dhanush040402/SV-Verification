@@ -1,3 +1,4 @@
+//transaction
 class transaction;
   rand bit d;
   rand bit rst;
