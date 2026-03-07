@@ -1,3 +1,4 @@
+//generator
 class generator;
   
   mailbox gen_to_driv;
