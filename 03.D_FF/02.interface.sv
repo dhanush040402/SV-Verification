@@ -1,3 +1,4 @@
+//interface
 interface intr;
   logic clk;
   logic rst;
