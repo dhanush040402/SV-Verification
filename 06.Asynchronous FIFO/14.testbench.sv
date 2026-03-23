@@ -12,30 +12,22 @@ module tb;
   initial begin
     
     intr.wclk = 1 ;
-    forever #7 intr.wclk = ~ intr.wclk;
+    forever #10 intr.wclk = ~ intr.wclk;
     
   end
   
   initial begin
     
     intr.rclk = 1 ;
-    forever #5 intr.rclk = ~ intr.rclk;
+    forever #15 intr.rclk = ~ intr.rclk;
     
   end
   
   initial begin
     $dumpfile("async_fifo.vcd");
-    $dumpvars();
-    
-    #400;
+    $dumpvars();  
+    #1000;
     $finish;
-      
   end
   
 endmodule
-  
-  
-  
-  
-  
-  
