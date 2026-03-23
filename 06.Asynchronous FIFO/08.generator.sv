@@ -1,37 +1,75 @@
 class generator #(parameter depth , data_width);
-  transaction #( depth , data_width) tr;
-  mailbox gentodri;
+  transaction #( depth , data_width) w_tr,r_tr;
   
-  function new (mailbox gentodri);
-    this.gentodri = gentodri;
+  mailbox w_gentodri;
+  mailbox r_gentodri;
+  
+  event w_sb_done;
+  event r_sb_done;
+  
+  function new (mailbox w_gentodri,mailbox r_gentodri,event w_sb_done,event r_sb_done);
+    this.w_gentodri = w_gentodri;
+    this.r_gentodri = r_gentodri;
+    this.w_sb_done  = w_sb_done;
+    this.r_sb_done  = r_sb_done;
+    
   endfunction
   
   task main();
-    for (int i = 0 ; i < ( depth * 2 ) ; i++ ) begin
-      tr = new();
+    fork
+      w_main();
+      r_main();
+    join
+  endtask
+  
+  task w_main();
+    for (int i = 0 ; i < ( depth ) ; i++ ) begin
+      w_tr = new();
       
       if (i==0)begin
-        tr.rst_c.constraint_mode(1);
-        tr.w_c.constraint_mode(0);
-        tr.r_c.constraint_mode(0);
-        tr.randomize();
+        w_tr.rst_c.constraint_mode(1);
+        w_tr.w_c.constraint_mode(0);
+        w_tr.r_c.constraint_mode(0);
+        w_tr.randomize();
+        w_gentodri.put(w_tr);
       end
       
-      else if ( i  < (depth + 1 ) ) begin
-        tr.rst_c.constraint_mode(0);
-        tr.w_c.constraint_mode(1);
-        tr.r_c.constraint_mode(0);
-        tr.randomize();
+      else begin
+        w_tr.rst_c.constraint_mode(0);
+        w_tr.w_c.constraint_mode(1);
+        w_tr.r_c.constraint_mode(0);
+        w_tr.randomize();
+        w_gentodri.put(w_tr);
+      end
+      w_tr.wdisplay("Generator write");
+      @(w_sb_done);
+    
+    end
+  endtask
+  
+  task r_main();
+    for (int i = 0 ; i < ( depth ) ; i++ ) begin
+      r_tr = new();
+      
+      if (i==0)begin
+        r_tr.rst_c.constraint_mode(1);
+        r_tr.w_c.constraint_mode(0);
+        r_tr.r_c.constraint_mode(0);
+        r_tr.randomize();
+        r_gentodri.put(r_tr);
       end
       
-      else if ( i  < (depth * 2 ) ) begin
-        tr.rst_c.constraint_mode(0);
-        tr.w_c.constraint_mode(0);
-        tr.r_c.constraint_mode(1);
-        tr.randomize();
+      else begin
+        r_tr.rst_c.constraint_mode(0);
+        r_tr.w_c.constraint_mode(0);
+        r_tr.r_c.constraint_mode(1);
+        r_tr.randomize();
+        r_gentodri.put(r_tr);
       end
+      r_tr.rdisplay("Generator Read");
+      @(r_sb_done);
       
-      gentodri.put(tr);
+      
     end
   endtask
   
