@@ -1,20 +1,10 @@
-`timescale 1ns/1ps
-
+`include "interface.sv"
 `include "synchronizer.sv"
 `include "write_ptr_handler.sv"
 `include "read_ptr_handler.sv"
 `include "memory.sv"
 
-module async_fifo_top #(parameter depth=8, data_width=8) (
-  /*input wclk, wrst, w_en,
-  input rclk, rrst, r_en,
-  input [data_width-1:0] data_in,
-  output [data_width-1:0] data_out,
-  output full, empty*/
-  variable intr
-);
-  
-  parameter ptr_width = $clog2(depth);
+module async_fifo_top #(parameter depth=8, data_width=8, ptr_width = $clog2(depth)) (inter intr);
   
   wire [ptr_width:0] b_wptr, b_rptr;
   wire [ptr_width:0] g_wptr, g_rptr;
