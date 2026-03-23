@@ -40,16 +40,14 @@ class transaction #(parameter depth , data_width);
     
   }
   
-  function void wdisplay();
-    
-    $display("\nWrite	::	| Reset	: %b | Enable	: %b | Full	: %b	 :: Input Data	: %d || Time	: %0t", wrst, w_en, full, data_in, $time);
-    
+  function void wdisplay(string name);
+    $display("\n----%s----",name);
+    $display("Write	::	Reset	: %b | W_Enable	: %b | Full	: %b	 :: Input Data	: %d || Time	: %0t", wrst, w_en, full, data_in, $time);
   endfunction
   
-  function void rdisplay();
-    
-    $display("\nRead	::	| Reset	: %b | Enable	: %b | Empty	: %b	 :: Output Data	: %d || Time	: %0t\n", rrst, r_en, empty, data_out, $time);
-    
+  function void rdisplay(string name);
+    $display("----%s----",name);
+    $display("Read	::	Reset	: %b | R_Enable	: %b | Empty	: %b	 :: Output Data	: %d || Time	: %0t\n", rrst, r_en, empty, data_out, $time);
   endfunction
   
 endclass
