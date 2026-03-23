@@ -7,7 +7,8 @@ program test #( depth , data_width) (variable intr);
     
     envi = new( intr.wd , intr.rd , intr.wm , intr.rm);
     envi.envi();
-    
+    #1000;
+    $finish;
   end
   
 endprogram
