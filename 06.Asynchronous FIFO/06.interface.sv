@@ -1,3 +1,4 @@
+//interface
 interface variable #(parameter depth=8, data_width=8);
   
   logic wclk;
