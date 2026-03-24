@@ -1,3 +1,4 @@
+//write point handler
 `timescale 1ns/1ps
 
 module write_ptr_handler #(parameter ptr_width=3) (
