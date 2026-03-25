@@ -1,3 +1,4 @@
+//transaction
 class transaction #(parameter depth , data_width);
   
   rand bit wrst;
