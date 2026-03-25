@@ -1,3 +1,4 @@
+//generator
 class generator #(parameter depth , data_width);
   transaction #( depth , data_width) w_tr,r_tr;
   
