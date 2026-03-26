@@ -1,3 +1,4 @@
+//testbench
 `include "test.sv"
 
 module tb;
